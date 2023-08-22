@@ -8,26 +8,25 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
+    @StateObject var viewModel = LoginViewModel()
     
     var body: some View {
         NavigationStack{
             VStack{
                 Spacer()
-                Image("ios-et")
+                Image(systemName: "creditcard.circle")
                     .resizable()
-                    .scaledToFit()
-
-                    .frame(width: 50, height: 50)
+                    .frame(width: 70, height: 70)
+                    .fontWeight(.thin)
                     .padding()
                 
                 VStack{
-                    TextField("Enter your email", text: $email)
+                    TextField("Enter your email", text: $viewModel.email)
+                        .autocapitalization(.none)
                         .autocapitalization(.none)
                         .modifier(TextFieldModifier())
                     
-                    SecureField("Enter your password", text: $password)
+                    SecureField("Enter your password", text: $viewModel.password)
                         .modifier(TextFieldModifier())
                 }
                 
@@ -44,7 +43,9 @@ struct LoginView: View {
                 }
                 
                 Button {
-                    
+                    Task{
+                        try await viewModel.loginUser()
+                    }
                 } label: {
                     Text("Login")
                         .modifier(ButtonModifier())
@@ -53,7 +54,7 @@ struct LoginView: View {
                 Divider()
                 
                 NavigationLink {
-                    Text("Registration view")
+                    RegistrationView()
                 } label: {
                     HStack(spacing: 3){
                         Text("Don't have an account")

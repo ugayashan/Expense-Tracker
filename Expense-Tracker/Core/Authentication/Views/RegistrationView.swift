@@ -8,34 +8,32 @@
 import SwiftUI
 
 struct RegistrationView: View {
-    @State private var email = ""
-    @State private var password = ""
-    @State private var fullname = ""
-    @State private var username = ""
+    @StateObject var viewModel = RegistrationViewModel()
     
     var body: some View {
-        NavigationStack{
+        NavigationStack(){
             VStack{
                 Spacer()
-                Image("ios-et")
+                Image(systemName: "creditcard.circle")
                     .resizable()
-                    .scaledToFit()
-                    .frame(width: 50, height: 50)
+                    .frame(width: 70, height: 70)
+                    .fontWeight(.thin)
                     .padding()
                 
                 VStack{
-                    TextField("Enter your email", text: $email)
+                    TextField("Enter your email", text: $viewModel.email)
+                        .autocapitalization(.none)
                         .modifier(TextFieldModifier())
-                    TextField("Enter your password", text: $password)
+                    SecureField("Enter your password", text: $viewModel.password)
                         .modifier(TextFieldModifier())
-                    TextField("Enter your full name", text: $fullname)
+                    TextField("Enter your full name", text: $viewModel.fullname)
                         .modifier(TextFieldModifier())
-                    SecureField("Enter your username", text: $username)
+                    TextField("Enter your username", text: $viewModel.username)
                         .modifier(TextFieldModifier())
                 }
                 
                 Button {
-                    
+                    Task { try await viewModel.createUser() }
                 } label: {
                     Text("Sign Up")
                         .modifier(ButtonModifier())
@@ -46,7 +44,7 @@ struct RegistrationView: View {
                 Divider()
                 
                 NavigationLink {
-                    Text("Registration view")
+                    LoginView()
                 } label: {
                     HStack(spacing: 3){
                         Text("Already have an account")

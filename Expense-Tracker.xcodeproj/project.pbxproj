@@ -32,7 +32,7 @@
 		FB14FD152A95E8DC005E2F08 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB14FD122A95E8DC005E2F08 /* AddCategoryView.swift */; };
 		FB14FD162A95E8DC005E2F08 /* CatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB14FD132A95E8DC005E2F08 /* CatListItem.swift */; };
 		FB14FD172A95E8DC005E2F08 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB14FD142A95E8DC005E2F08 /* CategoryListView.swift */; };
-		FB14FD192A95E907005E2F08 /* AddCategoryListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB14FD182A95E907005E2F08 /* AddCategoryListModel.swift */; };
+		FB14FD192A95E907005E2F08 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB14FD182A95E907005E2F08 /* Category.swift */; };
 		FB1B229C2A9619BC003C678F /* CustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB00AE8B2A96189B009D2B65 /* CustomToggle.swift */; };
 		FB1B229E2A961A9D003C678F /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1B229D2A961A9D003C678F /* CategoryService.swift */; };
 /* End PBXBuildFile section */
@@ -61,7 +61,7 @@
 		FB14FD122A95E8DC005E2F08 /* AddCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddCategoryView.swift; path = ../../../../../ExpenseTrackerApp/ExpenseTrackerApp/AddCategoryView.swift; sourceTree = "<group>"; };
 		FB14FD132A95E8DC005E2F08 /* CatListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatListItem.swift; path = ../../../../../ExpenseTrackerApp/ExpenseTrackerApp/CatListItem.swift; sourceTree = "<group>"; };
 		FB14FD142A95E8DC005E2F08 /* CategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryListView.swift; path = ../../../../../ExpenseTrackerApp/ExpenseTrackerApp/CategoryListView.swift; sourceTree = "<group>"; };
-		FB14FD182A95E907005E2F08 /* AddCategoryListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddCategoryListModel.swift; path = ../../../ExpenseTrackerApp/ExpenseTrackerApp/AddCategoryListModel.swift; sourceTree = "<group>"; };
+		FB14FD182A95E907005E2F08 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = ../../../ExpenseTrackerApp/ExpenseTrackerApp/Category.swift; sourceTree = "<group>"; };
 		FB1B229D2A961A9D003C678F /* CategoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -198,7 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				E515214A2A955C9400A21526 /* User.swift */,
-				FB14FD182A95E907005E2F08 /* AddCategoryListModel.swift */,
+				FB14FD182A95E907005E2F08 /* Category.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -404,7 +404,7 @@
 				E572C0CE2A87D4970015FABD /* ContentView.swift in Sources */,
 				E515214D2A95637200A21526 /* UserService.swift in Sources */,
 				E58E452F2A94EE3C00D43115 /* ContentViewModel.swift in Sources */,
-				FB14FD192A95E907005E2F08 /* AddCategoryListModel.swift in Sources */,
+				FB14FD192A95E907005E2F08 /* Category.swift in Sources */,
 				FB1B229C2A9619BC003C678F /* CustomToggle.swift in Sources */,
 				E572C0CC2A87D4970015FABD /* Expense_TrackerApp.swift in Sources */,
 				E515214B2A955C9400A21526 /* User.swift in Sources */,

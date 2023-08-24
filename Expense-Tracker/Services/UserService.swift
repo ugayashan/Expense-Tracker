@@ -9,9 +9,16 @@ import Firebase
 import FirebaseFirestoreSwift
 
 class UserService {
-    @Published var currentUser: User ?
+    
+    @Published var currentUser: User?
     
     static let shared = UserService()
+    
+    init() {
+        Task{
+            try await fetchCurrentUser()
+        }
+    }
     
     func fetchCurrentUser() async throws{
         guard let uid = Auth.auth().currentUser?.uid else { return }

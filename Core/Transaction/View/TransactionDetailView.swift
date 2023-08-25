@@ -60,7 +60,7 @@ struct TransactionDetailView: View {
 
 struct TransactionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let transaction = Transaction(title: "sample", comment: "sample", amount: 1000.00, transactionDate: Date.now, type: "sample", category:"")
+        let transaction = Transaction(title: "sample", comment: "sample", amount: 1000.00, transactionDate: Date.now, type: "sample", category:"", user: "Sanjani", recurringTransRef: "")
         return
             NavigationView{
                 TransactionDetailView(transaction: transaction)

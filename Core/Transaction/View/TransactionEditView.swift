@@ -218,7 +218,7 @@ struct TransactionEditView: View {
 
 struct TransactionEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let transaction = Transaction(title: "Tution Fees", comment: "Tution Fees for Dance Class", amount: 5000.00, transactionDate: Date.now, type: "Expense", category: "Bills")
+        let transaction = Transaction(title: "Tution Fees", comment: "Tution Fees for Dance Class", amount: 5000.00, transactionDate: Date.now, type: "Expense", category: "Bills", user: "Sanjani", recurringTransRef: "")
         let transactionViewModel = TransactionViewModel(transaction: transaction)
         return TransactionEditView(viewModel: transactionViewModel, mode: .edit)
         //return TransactionEditView()

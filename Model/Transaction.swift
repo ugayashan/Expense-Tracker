@@ -16,6 +16,8 @@ struct Transaction: Identifiable, Codable{
     var transactionDate : Date
     var type : String
     var category : String
+    var user : String
+    var recurringTransRef : String
     
     
     enum CodingKeys: String, CodingKey{
@@ -26,5 +28,7 @@ struct Transaction: Identifiable, Codable{
         case transactionDate
         case type
         case category
+        case user
+        case recurringTransRef
     }
 }

@@ -17,7 +17,7 @@ class TransactionViewModel:ObservableObject{
     
     private var cancellables = Set<AnyCancellable>()
     
-    init(transaction: Transaction = Transaction(title: "", comment: "", amount: 0.00, transactionDate: Date.now, type: "", category: "")){
+    init(transaction: Transaction = Transaction(title: "", comment: "", amount: 0.00, transactionDate: Date.now, type: "", category: "", user: "", recurringTransRef: "")){
         self.transaction = transaction
         
         self.$transaction
@@ -53,6 +53,8 @@ class TransactionViewModel:ObservableObject{
       }
        
       private func updateOrAddTransaction() {
+          transaction.user = AuthService().userSession?.uid ?? "";
+          transaction.recurringTransRef = "";
         if let _ = transaction.id {
             self.updateTransaction(self.transaction)
         }

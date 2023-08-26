@@ -1,43 +1,27 @@
 //
-//  TransactionEditView.swift
+//  RepeatTransactionEditView.swift
 //  Expense-Tracker
 //
-//  Created by user234389 on 8/17/23.
+//  Created by user234389 on 8/26/23.
 //
 
 import SwiftUI
 
- enum Mode {
-  case new
-  case edit
-}
- 
-enum Action {
-  case delete
-  case done
-  case cancel
-}
 
-struct TransactionEditView: View {
-    
+
+
+struct RepeatTransactionEditView: View {
     @Environment(\.presentationMode) private var presentationMode
     @State var presentActionSheet = false
     
     @State private var date = Date()
     
-    //var transType: String = "Expense"
-    //@ObservedObject var categories = getCategories();
-
-    @ObservedObject var viewModel = TransactionViewModel()
+    @ObservedObject var viewModel = RepeatTransactionViewModel()
     @State var selection = ""
-    
-    /*init(){
-        _selection = State<String>(initialValue: TransactionViewModel().transaction.type)    }*/
     
     
     var mode: Mode = .new
     var completionHandler: ((Result<Action, Error>) -> Void)?
-    //var categories = [Category]();
     
     
     var cancelButton: some View {
@@ -63,23 +47,7 @@ struct TransactionEditView: View {
                     return formatter
                 }()
                 
-                /*Section{
-                    Picker(selection: $viewModel.transaction.type , label: Text("Income/Expense")) {
-                        Text("Income").tag("Income")
-                        Text("Expense").tag("Expense")
-                    }
-                    .pickerStyle(.segmented)
-                    .onTapGesture (count: 1){
-                        self.viewModel.categories.removeAll()
-                        self.viewModel.fetchCategories(viewModel.transaction.type)
-                    }
-                    /*.onChange(of: $viewModel.$transaction.$type){ tag in
-                        self.viewModel.categories.removeAll();
-                        self.viewModel.fetchCategories(viewModel.transaction.type)
-                     }*/
-                    
-                    
-                }*/
+                
                 
                 Section{
                     
@@ -92,16 +60,12 @@ struct TransactionEditView: View {
                         Text("Expense").tag("Expense")
                     }
                     .pickerStyle(.segmented)
-                    /*.onTapGesture (count: 1){
-                        self.viewModel.categories.removeAll()
-                        self.viewModel.fetchCategories(viewModel.transaction.type)
-                    }*/
                     .onChange(of: selection){ tag in
                         self.viewModel.categories.removeAll();
                         self.viewModel.fetchCategories(selection)
                      }
                     .onAppear(){
-                        selection = self.viewModel.transaction.type
+                        selection = self.viewModel.repTransaction.type
                         if(selection.isEmpty){
                             selection = "Income";
                         }
@@ -109,14 +73,10 @@ struct TransactionEditView: View {
                     Spacer()
                     HStack {
                         Text("Title : ")
-                        TextField("", text: $viewModel.transaction.title)
-                    }/*.foregroundColor(Color(UIColor.darkGray)*/
-                    //TextField("Titleee", text: $viewModel.transaction.title)
-                    //TextField("Type", text: $viewModel.transaction.type)
+                        TextField("", text: $viewModel.repTransaction.title)
+                    }
                     
-                    //.pickerStyle(.segmented)
-                    
-                    Picker(selection: $viewModel.transaction.category, label: Text("Category : ")/*.foregroundColor(Color(UIColor.darkGray))*/) {
+                    Picker(selection: $viewModel.repTransaction.category, label: Text("Category : ")/*.foregroundColor(Color(UIColor.darkGray))*/) {
                         /*ForEach(self.viewModel.categories){ category in
                             
                             Text(category.name).tag(category.name)
@@ -134,19 +94,29 @@ struct TransactionEditView: View {
                     /*DatePicker("Transaction Date", selection: $date , displayedComponents: [.date])*/
                     
                     /*TransDatePicker(date: $viewModel.transaction.transactionDate)*/
-                                        DatePicker("Transaction Date : ",
-                               selection: $viewModel.transaction.transactionDate,
+                                        DatePicker("Start Date : ",
+                                                   selection: $viewModel.repTransaction.startDate,
                                                    displayedComponents: [.date])
                     
+                    DatePicker("End Date : ",
+                               selection: $viewModel.repTransaction.endDate,
+                               displayedComponents: [.date])
+                    
+                    Picker(selection: $viewModel.repTransaction.frequency, label: Text("Frequency")) {
+                        Text("Daily").tag("Daily")
+                        Text("Weekly").tag("Weekly")
+                        Text("Monthly").tag("Monthly")
+                        Text("Yearly").tag("Yearly")
+                    }
                     
                     HStack {
                         Text("Amount : ")
-                        TextField("", value: $viewModel.transaction.amount, formatter: amountFormatter)
+                        TextField("", value: $viewModel.repTransaction.amount, formatter: amountFormatter)
                     }
                     
                     HStack {
                         Text("Comments : ")
-                        TextField("", text: $viewModel.transaction.comment)
+                        TextField("", text: $viewModel.repTransaction.comment)
                     }
                     
                     
@@ -176,7 +146,7 @@ struct TransactionEditView: View {
                     }
                 }
             }
-            .navigationTitle(mode == .new ? "New Transaction" : "Edit Transaction")
+            .navigationTitle(mode == .new ? "New Repeat Transaction" : "Edit Repeat Transaction")
             .navigationBarTitleDisplayMode(mode == .new ? .inline: .inline)
             .navigationBarItems(
                 leading: cancelButton, trailing: saveButton)
@@ -198,7 +168,7 @@ struct TransactionEditView: View {
       }
        
       func handleDoneTapped() {
-          self.viewModel.transaction.type = selection
+          self.viewModel.repTransaction.type = selection
           self.viewModel.handleDoneTapped()
         self.dismiss()
       }
@@ -213,27 +183,10 @@ struct TransactionEditView: View {
         self.presentationMode.wrappedValue.dismiss()
       }
     
-    
 }
 
-struct TransactionEditView_Previews: PreviewProvider {
+struct RepeatTransactionEditView_Previews: PreviewProvider {
     static var previews: some View {
-        let transaction = Transaction(title: "Tution Fees", comment: "Tution Fees for Dance Class", amount: 5000.00, transactionDate: Date.now, type: "Expense", category: "Bills", user: "Sanjani", recurringTransRef: "")
-        let transactionViewModel = TransactionViewModel(transaction: transaction)
-        return TransactionEditView(viewModel: transactionViewModel, mode: .edit)
-        //return TransactionEditView()
+        RepeatTransactionEditView()
     }
 }
-
-/*struct TransDatePicker: View {
-    @Binding var date : Date //<-- Here
-    var body: some View {
-        Form {
-            DatePicker("Transaction Date",
-                       selection: $date,
-                       displayedComponents: [.date])
-            
-        }
-    }
-}*/
-

@@ -12,13 +12,35 @@ struct TransactionHistoryView: View {
     @State var presentAddBookSheet = false
     
     private var addButton: some View{
-        Button(action:{ self.presentAddBookSheet.toggle()  }){
-            Image(systemName: "plus")
-            //Text("Transactions")
+            Button(action:{ self.presentAddBookSheet.toggle()  }){
+                Image(systemName: "plus").foregroundColor(.white)
+                //Text("Transactions")
+            }.font(.title2.weight(.semibold))
+            
+                .padding()
+
+                .background(Color.blue)
+
+                .foregroundColor(.white)
+
+                .clipShape(Circle())
+            
+            
+            
+            
+            
         }
         
         
         
+        
+    
+    
+    private var repeatButton: some View{
+        
+        NavigationLink(destination: RepeatTransactionsListView()) {
+            Image(systemName: "repeat")
+                        }
     }
     
     private var signOutButton: some View{
@@ -50,31 +72,52 @@ struct TransactionHistoryView: View {
         }
     }
     var body: some View {
-        NavigationView{
-            List{
-                ForEach (viewModel.transactions){ transaction in
-                    transactionRowView(transaction: transaction)
+           
+                
+                TabView{
+                    
+                        NavigationView{
+                            ZStack(alignment: .bottomTrailing){
+                            
+                                List{
+                                    ForEach (viewModel.transactions){ transaction in
+                                        transactionRowView(transaction: transaction)
+                                    }
+                                }
+                                .navigationBarTitle("Transactions")
+                                .navigationBarItems(trailing: repeatButton)
+                                .navigationBarItems(leading: signOutButton)
+                                .onAppear(){
+                                    print("TransactionsListView Appears. Subscribing to data updates.")
+                                    self.viewModel.subscribe()
+                                }
+                                
+                                
+                                /*.sheet(isPresented: self.$presentAddBookSheet){
+                                    TransactionEditView()
+                                }*/
+                                .fullScreenCover(isPresented: self.$presentAddBookSheet){
+                                    TransactionEditView()
+                                }
+                            addButton.padding()
+                            
+                        }
+                        
+                    }
                 }
-            }
-            .navigationBarTitle("Transactions")
-            .navigationBarItems(trailing: addButton)
-            .navigationBarItems(leading: signOutButton)
-            .onAppear(){
-                print("TransactionsListView Appears. Subscribing to data updates.")
-                self.viewModel.subscribe()
-            }
-            /*.sheet(isPresented: self.$presentAddBookSheet){
-                TransactionEditView()
-            }*/
-            .fullScreenCover(isPresented: self.$presentAddBookSheet){
-                TransactionEditView()
-            }
+                
+            
+            
+            
         }
-        
-    }
-}
+    
+    func showRepeatTransView() {
+      RepeatTransactionsListView()
+    }}
 
-struct TransactionHistoryView_Previews: PreviewProvider {
+
+
+struct RepeatTransactionsListView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionHistoryView()
     }

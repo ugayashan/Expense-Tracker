@@ -32,16 +32,18 @@ class TransactionViewModel:ObservableObject{
     
     private var db = Firestore.firestore()
     
-    private func addTransaction(_ transaction: Transaction) {
+    func addTransaction(_ transaction: Transaction) {
         do {
+            print("adding transaction to table")
           let _ = try db.collection("transactions").addDocument(from: transaction)
         }
         catch {
+            print("error")
           print(error)
         }
       }
        
-    private func updateTransaction(_ transaction: Transaction) {
+    func updateTransaction(_ transaction: Transaction) {
         if let documentId = transaction.id {
           do {
             try db.collection("transactions").document(documentId).setData(from: transaction)
@@ -63,7 +65,7 @@ class TransactionViewModel:ObservableObject{
         }
       }
        
-      private func removeTransaction() {
+      func removeTransaction() {
         if let documentId = transaction.id {
           db.collection("transactions").document(documentId).delete { error in
             if let error = error {

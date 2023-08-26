@@ -15,7 +15,7 @@ struct StatisticsView: View {
     var body: some View {
         VStack {
             HStack {
-                LineChartView(data: [12, 45, 20], title: "Line Chart")
+                LineChartView(data: model.getLineChartData(), title: "Line Chart")
                 BarChartView(
                     data: model.getChartData(),
                     title: "Income & Expenses"
@@ -33,6 +33,7 @@ struct StatisticsView: View {
     
     init() {
         model.getData()
+        model.getExpenseData()
     }
 }
 

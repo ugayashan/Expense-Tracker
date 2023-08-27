@@ -109,5 +109,32 @@ class TransactionViewModel:ObservableObject{
         }
         //return categories;
     }
+    
+    func getCategory(_ category: String) -> Category{
+        var name : String = ""
+        var type : String = ""
+        var id : String = ""
+        var image : String = ""
+        var uid : String = ""
+        var category : Category = Category(catId: "", catName: "", catType: "", catImage: "");
+        db.collection("category").whereField("catId", isEqualTo: category).whereField("userid", isEqualTo: AuthService().userSession?.uid)
+            .getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        id = document["catId"] as? String ?? "";
+                        name = document["catName"] as? String ?? "";
+                        type = document["catType"] as? String ?? "";
+                        image = document["catImage"] as? String ?? "";
+                        uid = document["userid"] as? String ?? "";
+                        category =  Category(catId: id, catName: name, catType: type, catImage: image, userid: uid);
+                        
+                    }
+                    
+                }
+        }
+        return category;
+    }
 }
 

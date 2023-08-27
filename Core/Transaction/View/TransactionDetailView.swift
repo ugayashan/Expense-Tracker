@@ -12,6 +12,8 @@ struct TransactionDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     @State var presentEditTransactionSheet = false
     
+    var viewModel : TransactionViewModel = TransactionViewModel();
+    
     var transaction: Transaction
     
     private func editButton(action: @escaping () -> Void) -> some View{
@@ -22,15 +24,23 @@ struct TransactionDetailView: View {
     
     var body: some View {
         Form{
-            Section(header: Text("Transaction")){
-                Text(transaction.title)
-                Text(transaction.comment)
-            }
-            Section(header: Text("Date")){
-                Text("\(transaction.transactionDate, style: .date)")
-               
-            }
-            .navigationBarTitle(transaction.title)
+            //Section(header: Text("")){
+                Text("Title : \(transaction.title)")
+                Text("Type: \(transaction.type)")
+                Text("Date : \(transaction.transactionDate, style: .date)")
+                Text("Amount : \(transaction.amount, specifier: "%.2f")")
+                
+                /*var catString = getCategoryString(category: transaction.category)
+                HStack{
+                    Text("Category : ")
+                    Image(systemName: catString[1])
+                    Text("\(catString[0])")
+                }*/
+                
+                Text("Comments : \(transaction.comment)")
+            //}
+            
+            .navigationBarTitle("")
             .navigationBarItems(trailing: editButton {
                 self.presentEditTransactionSheet.toggle()
             })
@@ -63,11 +73,22 @@ struct TransactionDetailView: View {
                 )*/
         }
     }
+    
+    func getCategoryString( category : String) -> Array <String> {
+        var catString : [String] = ["",""]
+        var category : Category = viewModel.getCategory(category)
+        
+        catString[0] = category.catName
+        catString[1] = category.catImage
+        
+        
+        return catString
+    }
 }
 
 struct TransactionDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        let transaction = Transaction(title: "sample", comment: "sample", amount: 1000.00, transactionDate: Date.now, type: "sample", category:"", user: "Sanjani", recurringTransRef: "")
+        let transaction = Transaction(title: "Groceries", comment: "Groceries for June 02 Week", amount: 1000.00, transactionDate: Date.now, type: "sample", category:"Food", user: "Sanjani", recurringTransRef: "")
         return
             NavigationView{
                 TransactionDetailView(transaction: transaction)

@@ -22,15 +22,24 @@ struct RepeatTransactionDetailView: View {
     
     var body: some View {
         Form{
-                Section(header: Text("Transaction")){
-                    Text(repTransaction.title)
-                    Text(repTransaction.comment)
-                }
-                Section(header: Text("Start Date")){
-                    Text("\(repTransaction.startDate , style: .date)")
-                    
-                }
-                .navigationBarTitle(repTransaction.title)
+            //Section(header: Text("")){
+                Text("Title : \(repTransaction.title)")
+                Text("Type: \(repTransaction.type)")
+            Text("Start Date : \(repTransaction.startDate, style: .date)")
+            Text("End Date : \(repTransaction.endDate, style: .date)")
+            Text("Frequency: \(repTransaction.frequency)")
+            Text("Amount : \(repTransaction.amount, specifier: "%.2f")")
+                
+                /*var catString = getCategoryString(category: transaction.category)
+                HStack{
+                    Text("Category : ")
+                    Image(systemName: catString[1])
+                    Text("\(catString[0])")
+                }*/
+                
+            Text("Comments : \(repTransaction.comment)")
+            //}
+                .navigationBarTitle("")
                 .navigationBarItems(trailing: editButton {
                     self.presentEditTransactionSheet.toggle()
                 })

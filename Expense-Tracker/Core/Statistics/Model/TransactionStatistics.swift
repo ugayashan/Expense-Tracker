@@ -12,5 +12,6 @@ struct TransactionStatistics: Identifiable {
     var id: String
     var title: String
     var amount: Double
+    var type: String
     
 }

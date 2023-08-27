@@ -15,18 +15,15 @@ struct StatisticsView: View {
     var body: some View {
         VStack {
             HStack {
-                LineChartView(data: model.getLineChartData(), title: "Line Chart")
+                LineChartView(data: model.getLineChartData(), title: "Exp. Over Period")
                 BarChartView(
                     data: model.getChartData(),
-                    title: "Income & Expenses"
+                    title: "Your Transactions"
                 )
             }
             PieChartView(
-                data: [12, 22, 15, 25, 10, 7],
-                title: "Pie Chart")
-            List(model.transactionList) { item in
-                Text(item.title)
-            }
+                data: model.getPieChartData(),
+                title: "Income & Expenses")
         }
         
     }

@@ -29,7 +29,8 @@ class StatisticsViewModel: ObservableObject {
                         self.transactionList = snapshot.documents.map { d in
                             return TransactionStatistics(id: d.documentID,
                                                          title: d["title"] as? String ?? "",
-                                                         amount: d["amount"] as? Double ?? 0)
+                                                         amount: d["amount"] as? Double ?? 0,
+                                                         type: d["type"] as? String ?? "")
                         }
                     }
                 }
@@ -45,6 +46,21 @@ class StatisticsViewModel: ObservableObject {
         return ChartData(values: chartDataValues)
     }
     
+    func getPieChartData() -> [Double] {
+        var totalIncome: Double = 0
+        var totalExpense: Double = 0
+        
+        for transaction in transactionList {
+            if transaction.type == "Income" {
+                totalIncome += transaction.amount
+            } else if transaction.type == "Expense" {
+                totalExpense += transaction.amount
+            }
+        }
+        
+        return [totalIncome, totalExpense]
+    }
+        
     func getExpenseData() {
         let db = Firestore.firestore()
         
@@ -60,7 +76,8 @@ class StatisticsViewModel: ObservableObject {
                         self.transactionExpenseList = snapshot.documents.map { d in
                             return TransactionStatistics(id: d.documentID,
                                                          title: d["title"] as? String ?? "",
-                                                         amount: d["amount"] as? Double ?? 0)
+                                                         amount: d["amount"] as? Double ?? 0,
+                                                         type: d["type"] as? String ?? "")
                         }
                     }
                 }

@@ -15,6 +15,10 @@ class RepeatTransactionViewModel:ObservableObject{
 @Published var modified = false
 @Published var categories = [Category]()
 
+private var listenerRegistration: ListenerRegistration?
+    var docIdsArr = [String]()
+  
+
 private var cancellables = Set<AnyCancellable>()
 
     init(repTransaction: RepeatTransaction = RepeatTransaction(repTransId: "",title: "",  comment: "", amount: 0.00, startDate: Date.now, endDate: Date.now, frequency: "", type: "", category: "", user: "")){
@@ -57,8 +61,7 @@ private func updateTransaction(_ repTransaction: RepeatTransaction) {
       
     if let _ = repTransaction.id {
         self.updateTransaction(self.repTransaction)
-        deleteTransactionByRepeat(repTrans: repTransaction)
-        createTransactionsFromRepeat(repTrans: repTransaction)
+        updateTransactionFromRepeat(repTrans: repTransaction)
     }
     else {
         repTransaction.repTransId = randomString();
@@ -143,8 +146,9 @@ func fetchCategories(_ transType: String){
                 for i in 1...dayCount{
                     var transacton = Transaction(title: repTrans.title, comment: repTrans.comment, amount: repTrans.amount, transactionDate: day, type: repTrans.type, category: repTrans.category, user: repTrans.user, recurringTransRef: repTrans.repTransId)
                     
-                    print("\(repTrans.title) - \(repTrans.category) - \(repTrans.repTransId) - \(repTrans.user)");
+                    
                     var transVM = TransactionViewModel(transaction: transacton)
+                    print("\(transacton.title) - \(transacton.category) - \(transacton.recurringTransRef) - \(transacton.user)");
                     transVM.addTransaction(transacton)
                     
                     day = Calendar.current.date(byAdding: .day, value: 1, to: day)!
@@ -279,9 +283,10 @@ func fetchCategories(_ transType: String){
             } else {
                 for document in querySnapshot!.documents {
                     //var id = document[document.] as? String ?? "";
+                    print("Deleting")
                     self.db.collection("transactions").document(document.documentID).delete { error in
                         if let error = error {
-                            print("EOOEO ***")
+                            
                             print(error.localizedDescription)
                         }
                     }
@@ -289,6 +294,43 @@ func fetchCategories(_ transType: String){
                 
             }
             
+        }
+        
+        
+    }
+    
+    func updateTransactionFromRepeat(repTrans: RepeatTransaction){
+        
+        getDocIdsToDelete(repTrans: repTrans)
+        
+        
+        
+        createTransactionsFromRepeat(repTrans: repTrans)
+    }
+    
+    func getDocIdsToDelete(repTrans: RepeatTransaction){
+        
+        
+        listenerRegistration = db.collection("transactions").whereField("recurringTransRef", isEqualTo: repTrans.repTransId).whereField("user", isEqualTo: AuthService().userSession?.uid).addSnapshotListener(){(querySnapshot, err) in 
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                }
+                else {
+                    for document in querySnapshot!.documents {
+                        print("document.documentID : \(document.documentID)")
+                        self.db.collection("transactions").document(document.documentID).delete { error in
+                                if let error = error {
+                                    
+                                    print(error.localizedDescription)
+                                }
+                            }
+                            
+                        
+                    }
+                    self.listenerRegistration?.remove();
+                    
+                 }
+                
         }
         
         

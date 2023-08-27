@@ -16,6 +16,7 @@ class AuthService{
     init(){
         self.userSession = Auth.auth().currentUser
     }
+    
     @MainActor
     func login(withEmail email: String , password: String ) async throws{
         do{

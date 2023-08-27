@@ -7,9 +7,47 @@
 
 import SwiftUI
 
+extension Date {
+    
+    static func from(year: Int, month: Int, day: Int) -> Date {
+        let calendar = Calendar.current
+        var dateComponents = DateComponents()
+        dateComponents.year = year
+        dateComponents.month = month
+        dateComponents.day = day
+        return calendar.date(from: dateComponents) ?? Date()
+    }
+    
+}
 struct TransactionHistoryView: View {
     @StateObject var viewModel =  TransactionHistoryViewModel()
     @State var presentAddBookSheet = false
+    
+    @State private var selectedDate: Date = Date();
+    @State private var filteredTrans: [Transaction] = []
+    @State private var searchText = String();
+    @State private var dateChanged =  false
+    
+    @State var openingMainView : Bool = false;
+    @Environment(\.isSearching) var isSearching: Bool
+    @State var presentEditTransactionSheet = false
+    
+    var newViewModel : TransactionHistoryViewModel = TransactionHistoryViewModel();
+    
+  
+    
+    var searchResults:[Transaction]{
+        
+        if searchText.isEmpty{
+            return viewModel.transactions
+        }
+        else {
+                return viewModel.transactions.filter {$0.title.hasPrefix(searchText)}
+        }
+        
+    }
+    
+   
     
     private var addButton: some View{
             Button(action:{ self.presentAddBookSheet.toggle()  }){
@@ -71,49 +109,104 @@ struct TransactionHistoryView: View {
             }
         }
     }
+    
+    private func searchButton(action: @escaping () -> Void) -> some View{
+        Button(action: { action() }) {
+            Text("Go")
+        }
+    }
     var body: some View {
-           
+        
+        
+        TabView{
+            
+            NavigationView{
                 
-                TabView{
+                
+                VStack{
+                    Section{
+                        HStack{
+                            DatePicker("Select Date", selection: $selectedDate, displayedComponents: .date)
+                            /*Button("Clear"){
+                                self.viewModel.subscribe()
+                                filteredTrans = self.viewModel.transactions
+                                dateChanged.toggle()
+                            }*/
+                            searchButton{
+                                filteredTrans = viewModel.transactions.filter{
+                                    Calendar.current.compare($0.transactionDate, to: selectedDate, toGranularity: .day) == .orderedSame
+                                }
+                                self.presentEditTransactionSheet.toggle()
+                            }
+                            
+                            
+                            
+                        }.padding(.leading)
+                            .padding(.trailing)
+                        
+                        
+                    }
                     
-                        NavigationView{
-                            ZStack(alignment: .bottomTrailing){
+                    ZStack(alignment: .bottomTrailing){
+                        
+                        
+                        
+                            List{
+                                ForEach (searchResults){ transaction in
+                                    transactionRowView(transaction: transaction)
+                                }
+                            }
+                            .navigationBarTitle("Transactions")
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationBarItems(trailing: repeatButton)
+                            .navigationBarItems(leading: signOutButton)
+                            .onAppear(){
+                                print("TransactionsListView Appears. Subscribing to data updates.")
+                                self.viewModel.subscribe()
+                                filteredTrans = self.viewModel.transactions
                             
-                                List{
-                                    ForEach (viewModel.transactions){ transaction in
-                                        transactionRowView(transaction: transaction)
-                                    }
-                                }
-                                .navigationBarTitle("Transactions")
-                                .navigationBarItems(trailing: repeatButton)
-                                .navigationBarItems(leading: signOutButton)
-                                .onAppear(){
-                                    print("TransactionsListView Appears. Subscribing to data updates.")
-                                    self.viewModel.subscribe()
-                                }
                                 
                                 
-                                /*.sheet(isPresented: self.$presentAddBookSheet){
-                                    TransactionEditView()
-                                }*/
-                                .fullScreenCover(isPresented: self.$presentAddBookSheet){
-                                    TransactionEditView()
+                            }
+                            .onChange(of: selectedDate){
+                                value in
+                                print("date changed")
+                                filteredTrans = viewModel.transactions.filter{
+                                    Calendar.current.compare($0.transactionDate, to: selectedDate, toGranularity: .day) == .orderedSame
                                 }
-                            addButton.padding()
-                            
+                                print("\(selectedDate)")
+                                print("\(filteredTrans[0].title)")
+                                
+                                newViewModel.transactions = filteredTrans
+                                
+                                
+                            }.sheet(isPresented: self.$presentEditTransactionSheet){
+                                TransactionDateSearchView(viewModel: newViewModel).presentationDetents([.height(600), .large])
                         }
+                        
+                        
+                        addButton.padding()
                         
                     }
                 }
                 
-            
-            
+                
+            }.searchable(text: $searchText)
+        }
+        
+        
+    }
             
         }
     
     func showRepeatTransView() {
       RepeatTransactionsListView()
-    }}
+    }
+
+func groupByDate(_ transactions: [Transaction]) -> [(Date, [Transaction])] {
+    let grouped = Dictionary(grouping: transactions, by: { $0.transactionDate})
+        return grouped.sorted(by: { $0.key < $1.key })
+    }
 
 
 

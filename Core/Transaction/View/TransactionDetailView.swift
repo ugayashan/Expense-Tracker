@@ -53,7 +53,14 @@ struct TransactionDetailView: View {
                           self.presentationMode.wrappedValue.dismiss()
                         }
                       }
-            }
+            }/*.navigationBarBackButtonHidden(true)
+                .navigationBarItems(leading:
+                    
+                    NavigationLink(destination: TransactionHistoryView()) {
+                        Image(systemName: "arrow.left")
+                                    }
+                    
+                )*/
         }
     }
 }

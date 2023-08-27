@@ -20,7 +20,7 @@ class StatisticsViewModel: ObservableObject {
         let currentUid = Auth.auth().currentUser?.uid
         
         db.collection("transactions")
-            .whereField("uid", isEqualTo: currentUid ?? "0")
+            .whereField("user", isEqualTo: currentUid ?? "0")
             .order(by: "transactionDate", descending: true)
             .getDocuments { snapshot, error in
             if error == nil {
@@ -67,7 +67,7 @@ class StatisticsViewModel: ObservableObject {
         let currentUid = Auth.auth().currentUser?.uid
         
         db.collection("transactions")
-            .whereField("uid", isEqualTo: currentUid ?? "0")
+            .whereField("user", isEqualTo: currentUid ?? "0")
             .order(by: "transactionDate", descending: true)
             .getDocuments { snapshot, error in
             if error == nil {

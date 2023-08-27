@@ -27,6 +27,10 @@
 		E5E397E22A8EB26F00F55B86 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5E397E12A8EB26F00F55B86 /* RegistrationView.swift */; };
 		E5FA93412A90C5450054B837 /* TextFieldModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FA93402A90C5450054B837 /* TextFieldModifier.swift */; };
 		E5FA93432A90C7000054B837 /* ButtonModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5FA93422A90C7000054B837 /* ButtonModifier.swift */; };
+		FA5127C92A99AD57003BE50F /* TransactionStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5127C82A99AD57003BE50F /* TransactionStatistics.swift */; };
+		FA5127CB2A99ADFF003BE50F /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5127CA2A99ADFF003BE50F /* StatisticsViewModel.swift */; };
+		FA7769EE2A98F37000756E31 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7769ED2A98F37000756E31 /* StatisticsView.swift */; };
+		FA7769F12A98F4C600756E31 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FA7769F02A98F4C600756E31 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +51,9 @@
 		E5E397E12A8EB26F00F55B86 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
 		E5FA93402A90C5450054B837 /* TextFieldModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldModifier.swift; sourceTree = "<group>"; };
 		E5FA93422A90C7000054B837 /* ButtonModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonModifier.swift; sourceTree = "<group>"; };
+		FA5127C82A99AD57003BE50F /* TransactionStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatistics.swift; sourceTree = "<group>"; };
+		FA5127CA2A99ADFF003BE50F /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
+		FA7769ED2A98F37000756E31 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +65,7 @@
 				E58E45252A94B4E000D43115 /* FirebaseStorage in Frameworks */,
 				E58E45212A94B4E000D43115 /* FirebaseFirestore in Frameworks */,
 				E58E45232A94B4E000D43115 /* FirebaseFirestoreSwift in Frameworks */,
+				FA7769F12A98F4C600756E31 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -195,6 +203,7 @@
 		E5E397D82A8E421200F55B86 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FA756EAF2A97CD0100645D33 /* Statistics */,
 				E58E45302A94F66700D43115 /* Transaction */,
 				E5E397DA2A8EA04700F55B86 /* Authentication */,
 				E5E397DB2A8EA05A00F55B86 /* Root */,
@@ -247,6 +256,40 @@
 			path = ViewModifier;
 			sourceTree = "<group>";
 		};
+		FA5127C72A99AD30003BE50F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA5127C82A99AD57003BE50F /* TransactionStatistics.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA756EAF2A97CD0100645D33 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				FA5127C72A99AD30003BE50F /* Model */,
+				FA7769EA2A98F0AC00756E31 /* View */,
+				FA756EB02A97CD1500645D33 /* ViewModel */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		FA756EB02A97CD1500645D33 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FA5127CA2A99ADFF003BE50F /* StatisticsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FA7769EA2A98F0AC00756E31 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA7769ED2A98F37000756E31 /* StatisticsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -268,6 +311,7 @@
 				E58E45202A94B4E000D43115 /* FirebaseFirestore */,
 				E58E45222A94B4E000D43115 /* FirebaseFirestoreSwift */,
 				E58E45242A94B4E000D43115 /* FirebaseStorage */,
+				FA7769F02A98F4C600756E31 /* SwiftUICharts */,
 			);
 			productName = "Expense-Tracker";
 			productReference = E572C0C82A87D4970015FABD /* Expense-Tracker.app */;
@@ -299,6 +343,7 @@
 			mainGroup = E572C0BF2A87D4970015FABD;
 			packageReferences = (
 				E58E451D2A94B4E000D43115 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				FA7769EF2A98F4C600756E31 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
 			productRefGroup = E572C0C92A87D4970015FABD /* Products */;
 			projectDirPath = "";
@@ -330,9 +375,12 @@
 				E5FA93432A90C7000054B837 /* ButtonModifier.swift in Sources */,
 				E5E397E02A8EA14C00F55B86 /* LoginView.swift in Sources */,
 				E51521492A9504D700A21526 /* LoginViewModel.swift in Sources */,
+				FA7769EE2A98F37000756E31 /* StatisticsView.swift in Sources */,
 				E5FA93412A90C5450054B837 /* TextFieldModifier.swift in Sources */,
 				E58E45292A94C33500D43115 /* RegistrationViewModel.swift in Sources */,
 				E572C0CE2A87D4970015FABD /* ContentView.swift in Sources */,
+				FA5127CB2A99ADFF003BE50F /* StatisticsViewModel.swift in Sources */,
+				FA5127C92A99AD57003BE50F /* TransactionStatistics.swift in Sources */,
 				E515214D2A95637200A21526 /* UserService.swift in Sources */,
 				E58E452F2A94EE3C00D43115 /* ContentViewModel.swift in Sources */,
 				E572C0CC2A87D4970015FABD /* Expense_TrackerApp.swift in Sources */,
@@ -552,6 +600,14 @@
 				kind = branch;
 			};
 		};
+		FA7769EF2A98F4C600756E31 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -574,6 +630,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E58E451D2A94B4E000D43115 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		FA7769F02A98F4C600756E31 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FA7769EF2A98F4C600756E31 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -6,11 +6,11 @@
 //
 
 import Foundation
+import Firebase
 
 
 class AddCategoryListViewModel: ObservableObject{
     
-    @Published var userId =  ""
     @Published var catId = ""
     @Published var catType = "Income"
     @Published var catName = ""
@@ -18,8 +18,18 @@ class AddCategoryListViewModel: ObservableObject{
     
     @MainActor
     func createCategory() async throws{
-//        print("DEBUG: \(userId) \(catId) \(catType) \(catName) \(catImage)")
-        try await CategoryService.shared.saveCategory(userId: userId, catId: catId, catType: catType, catName: catName, catImage: catImage)
+        let  db = Firestore.firestore()
+        let ref = db.collection("category").document()
+        ref.setData(["catid": catId,
+                     "catName": catName,
+                     "catType": catType,
+                     "catImage": catImage,
+                     "userid": AuthService().userSession?.uid ??  "",
+                    ]){
+            error in if let error = error{
+                print(error.localizedDescription)
+            }
+        }
     }
-    
+  
 }

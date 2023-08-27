@@ -183,6 +183,9 @@ struct TransactionHistoryView: View {
                             }.sheet(isPresented: self.$presentEditTransactionSheet){
                                 TransactionDateSearchView(viewModel: newViewModel).presentationDetents([.height(600), .large])
                         }
+                            .fullScreenCover(isPresented: self.$presentAddBookSheet){
+                                TransactionEditView()
+                        }
                         
                         
                         addButton.padding()

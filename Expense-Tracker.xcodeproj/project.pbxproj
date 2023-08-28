@@ -16,6 +16,9 @@
 		E572C0CE2A87D4970015FABD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E572C0CD2A87D4970015FABD /* ContentView.swift */; };
 		E572C0D02A87D4990015FABD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E572C0CF2A87D4990015FABD /* Assets.xcassets */; };
 		E572C0D32A87D4990015FABD /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E572C0D22A87D4990015FABD /* Preview Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
 		E583E8432A98CFB900646AAD /* PredictionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E583E8422A98CFB900646AAD /* PredictionCard.swift */; };
 		E583E8452A98D0F900646AAD /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E583E8442A98D0F900646AAD /* HeaderView.swift */; };
 		E583E8472A98D17A00646AAD /* PredictionCategoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E583E8462A98D17A00646AAD /* PredictionCategoryItemView.swift */; };
@@ -129,6 +132,10 @@
 		E572C0CA2A87D4970015FABD /* Expense-Tracker */ = {
 			isa = PBXGroup;
 			children = (
+        E572C0CB2A87D4970015FABD /* Expense_TrackerApp.swift */,
+				E572C0CD2A87D4970015FABD /* ContentView.swift */,
+				E572C0CF2A87D4990015FABD /* Assets.xcassets */,
+=======
 				E5E397D92A8E421600F55B86 /* App */,
 				E5E397D82A8E421200F55B86 /* Core */,
 				E5E397D72A8E420E00F55B86 /* Extensions */,
@@ -138,7 +145,7 @@
 				E5A453D22A97844D002364AA /* Animations */,
 				E572C0CF2A87D4990015FABD /* Assets.xcassets */,
 				E5B7BBA92A91FB4B005D10AB /* GoogleService-Info.plist */,
-				E572C0D12A87D4990015FABD /* Preview Content */,
+        E572C0D12A87D4990015FABD /* Preview Content */,
 			);
 			path = "Expense-Tracker";
 			sourceTree = "<group>";
@@ -151,7 +158,7 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		E583E84A2A98F6A700646AAD /* View */ = {
+    E583E84A2A98F6A700646AAD /* View */ = {
 			isa = PBXGroup;
 			children = (
 				E5957D272A96059B003831FD /* PredictionView.swift */,
@@ -442,7 +449,7 @@
 				E58E45242A94B4E000D43115 /* FirebaseStorage */,
 				FA7769F02A98F4C600756E31 /* SwiftUICharts */,
 			);
-			productName = "Expense-Tracker";
+      productName = "Expense-Tracker";
 			productReference = E572C0C82A87D4970015FABD /* Expense-Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -470,11 +477,11 @@
 				Base,
 			);
 			mainGroup = E572C0BF2A87D4970015FABD;
-			packageReferences = (
+      packageReferences = (
 				E58E451D2A94B4E000D43115 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				FA7769EF2A98F4C600756E31 /* XCRemoteSwiftPackageReference "ChartView" */,
 			);
-			productRefGroup = E572C0C92A87D4970015FABD /* Products */;
+      productRefGroup = E572C0C92A87D4970015FABD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -501,6 +508,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E572C0CE2A87D4970015FABD /* ContentView.swift in Sources */,
+				E572C0CC2A87D4970015FABD /* Expense_TrackerApp.swift in Sources */,
 				FB439C752A9CB4A10064BC29 /* AddCategoryListViewModel.swift in Sources */,
 				E5FA93432A90C7000054B837 /* ButtonModifier.swift in Sources */,
 				E583E8452A98D0F900646AAD /* HeaderView.swift in Sources */,

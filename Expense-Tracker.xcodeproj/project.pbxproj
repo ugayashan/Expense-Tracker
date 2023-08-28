@@ -42,6 +42,14 @@
 		FA5127CB2A99ADFF003BE50F /* StatisticsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5127CA2A99ADFF003BE50F /* StatisticsViewModel.swift */; };
 		FA7769EE2A98F37000756E31 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7769ED2A98F37000756E31 /* StatisticsView.swift */; };
 		FA7769F12A98F4C600756E31 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = FA7769F02A98F4C600756E31 /* SwiftUICharts */; };
+		FB439C752A9CB4A10064BC29 /* AddCategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C742A9CB4A10064BC29 /* AddCategoryListViewModel.swift */; };
+		FB439C772A9CB4B50064BC29 /* CategoryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C762A9CB4B50064BC29 /* CategoryListViewModel.swift */; };
+		FB439C7B2A9CB4D10064BC29 /* CategoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C7A2A9CB4D10064BC29 /* CategoryService.swift */; };
+		FB439C7F2A9CB4DD0064BC29 /* CatListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C7C2A9CB4DD0064BC29 /* CatListItem.swift */; };
+		FB439C802A9CB4DD0064BC29 /* AddCategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C7D2A9CB4DD0064BC29 /* AddCategoryView.swift */; };
+		FB439C812A9CB4DD0064BC29 /* CategoryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C7E2A9CB4DD0064BC29 /* CategoryListView.swift */; };
+		FB439C832A9CB4E70064BC29 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C822A9CB4E70064BC29 /* Category.swift */; };
+		FB439C852A9CB4F10064BC29 /* CustomToggle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB439C842A9CB4F10064BC29 /* CustomToggle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +84,14 @@
 		FA5127C82A99AD57003BE50F /* TransactionStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionStatistics.swift; sourceTree = "<group>"; };
 		FA5127CA2A99ADFF003BE50F /* StatisticsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewModel.swift; sourceTree = "<group>"; };
 		FA7769ED2A98F37000756E31 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		FB439C742A9CB4A10064BC29 /* AddCategoryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryListViewModel.swift; sourceTree = "<group>"; };
+		FB439C762A9CB4B50064BC29 /* CategoryListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListViewModel.swift; sourceTree = "<group>"; };
+		FB439C7A2A9CB4D10064BC29 /* CategoryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryService.swift; sourceTree = "<group>"; };
+		FB439C7C2A9CB4DD0064BC29 /* CatListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatListItem.swift; sourceTree = "<group>"; };
+		FB439C7D2A9CB4DD0064BC29 /* AddCategoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCategoryView.swift; sourceTree = "<group>"; };
+		FB439C7E2A9CB4DD0064BC29 /* CategoryListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryListView.swift; sourceTree = "<group>"; };
+		FB439C822A9CB4E70064BC29 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		FB439C842A9CB4F10064BC29 /* CustomToggle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomToggle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +274,7 @@
 		E5E397D62A8E420A00F55B86 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FB439C822A9CB4E70064BC29 /* Category.swift */,
 				E515214A2A955C9400A21526 /* User.swift */,
 				E583E8482A98F54500646AAD /* Prediction.swift */,
 			);
@@ -274,6 +291,7 @@
 		E5E397D82A8E421200F55B86 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				FB439C722A9CB4760064BC29 /* Category */,
 				FA756EAF2A97CD0100645D33 /* Statistics */,
 				E5A453D52A97949A002364AA /* Components */,
 				E5957D262A96054F003831FD /* Prediction */,
@@ -323,6 +341,7 @@
 		E5FA933F2A90C5040054B837 /* ViewModifier */ = {
 			isa = PBXGroup;
 			children = (
+				FB439C842A9CB4F10064BC29 /* CustomToggle.swift */,
 				E5FA93402A90C5450054B837 /* TextFieldModifier.swift */,
 				E5FA93422A90C7000054B837 /* ButtonModifier.swift */,
 			);
@@ -361,6 +380,43 @@
 				FA7769ED2A98F37000756E31 /* StatisticsView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		FB439C722A9CB4760064BC29 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				FB439C792A9CB4C50064BC29 /* Service */,
+				FB439C782A9CB4BB0064BC29 /* View */,
+				FB439C732A9CB48A0064BC29 /* ViewModel */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		FB439C732A9CB48A0064BC29 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				FB439C742A9CB4A10064BC29 /* AddCategoryListViewModel.swift */,
+				FB439C762A9CB4B50064BC29 /* CategoryListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		FB439C782A9CB4BB0064BC29 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FB439C7D2A9CB4DD0064BC29 /* AddCategoryView.swift */,
+				FB439C7E2A9CB4DD0064BC29 /* CategoryListView.swift */,
+				FB439C7C2A9CB4DD0064BC29 /* CatListItem.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		FB439C792A9CB4C50064BC29 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				FB439C7A2A9CB4D10064BC29 /* CategoryService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -445,25 +501,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB439C752A9CB4A10064BC29 /* AddCategoryListViewModel.swift in Sources */,
 				E5FA93432A90C7000054B837 /* ButtonModifier.swift in Sources */,
 				E583E8452A98D0F900646AAD /* HeaderView.swift in Sources */,
 				E54576AC2A99F36800A61390 /* MessageBoxView.swift in Sources */,
+				FB439C7F2A9CB4DD0064BC29 /* CatListItem.swift in Sources */,
 				E54576AE2A99FD0400A61390 /* ForeCastBoxView.swift in Sources */,
 				E5E397E02A8EA14C00F55B86 /* LoginView.swift in Sources */,
 				E583E8432A98CFB900646AAD /* PredictionCard.swift in Sources */,
 				E51521492A9504D700A21526 /* LoginViewModel.swift in Sources */,
 				FA7769EE2A98F37000756E31 /* StatisticsView.swift in Sources */,
+				FB439C7B2A9CB4D10064BC29 /* CategoryService.swift in Sources */,
+				FB439C832A9CB4E70064BC29 /* Category.swift in Sources */,
 				E5FA93412A90C5450054B837 /* TextFieldModifier.swift in Sources */,
 				E58E45292A94C33500D43115 /* RegistrationViewModel.swift in Sources */,
 				E572C0CE2A87D4970015FABD /* ContentView.swift in Sources */,
 				FA5127CB2A99ADFF003BE50F /* StatisticsViewModel.swift in Sources */,
+				FB439C772A9CB4B50064BC29 /* CategoryListViewModel.swift in Sources */,
 				FA5127C92A99AD57003BE50F /* TransactionStatistics.swift in Sources */,
 				E583E8492A98F54500646AAD /* Prediction.swift in Sources */,
+				FB439C802A9CB4DD0064BC29 /* AddCategoryView.swift in Sources */,
 				E515214D2A95637200A21526 /* UserService.swift in Sources */,
 				E58E452F2A94EE3C00D43115 /* ContentViewModel.swift in Sources */,
+				FB439C852A9CB4F10064BC29 /* CustomToggle.swift in Sources */,
 				E572C0CC2A87D4970015FABD /* Expense_TrackerApp.swift in Sources */,
 				E583E84F2A98F77A00646AAD /* PredictionService.swift in Sources */,
 				E515214B2A955C9400A21526 /* User.swift in Sources */,
+				FB439C812A9CB4DD0064BC29 /* CategoryListView.swift in Sources */,
 				E58E45342A94F6D000D43115 /* TransactionView.swift in Sources */,
 				E5E397E22A8EB26F00F55B86 /* RegistrationView.swift in Sources */,
 				E583E8472A98D17A00646AAD /* PredictionCategoryItemView.swift in Sources */,

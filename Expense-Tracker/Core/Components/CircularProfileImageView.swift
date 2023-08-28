@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CircularProfileImageView: View {
     var body: some View {
-        Image("pp")
+        Image("ios-et")
             .resizable()
             .scaledToFill()
             .frame(width: 30, height: 30)

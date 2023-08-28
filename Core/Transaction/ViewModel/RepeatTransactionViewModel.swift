@@ -14,6 +14,7 @@ class RepeatTransactionViewModel:ObservableObject{
 @Published var repTransaction: RepeatTransaction
 @Published var modified = false
 @Published var categories = [Category]()
+@Published var showErrorMessage = false
 
 private var listenerRegistration: ListenerRegistration?
     var docIdsArr = [String]()

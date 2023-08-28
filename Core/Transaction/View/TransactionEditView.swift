@@ -10,6 +10,7 @@ import SwiftUI
  enum Mode {
   case new
   case edit
+     
 }
  
 enum Action {
@@ -24,6 +25,7 @@ struct TransactionEditView: View {
     @State var presentActionSheet = false
     
     @State private var date = Date()
+    
     
     //var transType: String = "Expense"
     //@ObservedObject var categories = getCategories();
@@ -122,6 +124,7 @@ struct TransactionEditView: View {
                             Text(category.name).tag(category.name)
                             //print("***** \(category.name)")
                         }*/
+                        
                         ForEach(self.viewModel.categories, id: \.self) { category in // <-- notice the use of id
                             HStack {
                                 Image(systemName: category.catImage)
@@ -129,6 +132,7 @@ struct TransactionEditView: View {
                                                     }.tag(category.catId)
                                         }
                     }
+                    
                 
                     
                     /*DatePicker("Transaction Date", selection: $date , displayedComponents: [.date])*/
@@ -188,8 +192,9 @@ struct TransactionEditView: View {
                                   .cancel()
                                 ])
                   }
-            
-            
+            .alert(isPresented: $viewModel.showErrorMessage) {
+                Alert(title: Text("Error"), message: Text("Please fill Title, Category and Amount"), dismissButton: .cancel())
+                            }
         }
     }
     
@@ -199,8 +204,16 @@ struct TransactionEditView: View {
        
       func handleDoneTapped() {
           self.viewModel.transaction.type = selection
-          self.viewModel.handleDoneTapped()
-        self.dismiss()
+          
+          if(self.viewModel.transaction.title.isEmpty || self.viewModel.transaction.category.isEmpty ||
+             self.viewModel.transaction.amount == nil
+          ){
+              viewModel.showErrorMessage.toggle()
+          }
+          else{
+              
+              self.viewModel.handleDoneTapped()
+              self.dismiss()}
       }
        
       func handleDeleteTapped() {

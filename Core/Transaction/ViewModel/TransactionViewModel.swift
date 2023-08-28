@@ -14,6 +14,7 @@ class TransactionViewModel:ObservableObject{
     @Published var transaction: Transaction
     @Published var modified = false
     @Published var categories = [Category]()
+    @Published var showErrorMessage = false
     
     private var cancellables = Set<AnyCancellable>()
     

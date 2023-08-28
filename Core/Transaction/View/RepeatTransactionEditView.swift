@@ -18,6 +18,7 @@ struct RepeatTransactionEditView: View {
     
     @ObservedObject var viewModel = RepeatTransactionViewModel()
     @State var selection = ""
+    @State var errorMsg : String = ""
     
     
     var mode: Mode = .new
@@ -158,6 +159,9 @@ struct RepeatTransactionEditView: View {
                                   .cancel()
                                 ])
                   }
+            .alert(isPresented: $viewModel.showErrorMessage) {
+                Alert(title: Text("Error"), message: Text(self.errorMsg), dismissButton: .cancel())
+                            }
             
             
         }
@@ -169,8 +173,22 @@ struct RepeatTransactionEditView: View {
        
       func handleDoneTapped() {
           self.viewModel.repTransaction.type = selection
-          self.viewModel.handleDoneTapped()
-        self.dismiss()
+          
+          if(self.viewModel.repTransaction.title.isEmpty || self.viewModel.repTransaction.category.isEmpty ||
+             self.viewModel.repTransaction.amount == nil ||
+             self.viewModel.repTransaction.frequency.isEmpty
+          ){
+              errorMsg = "Please fill Title, Category, Amount and Frequency"
+              viewModel.showErrorMessage.toggle()
+          }
+          else if (self.viewModel.repTransaction.startDate > self.viewModel.repTransaction.endDate){
+              errorMsg = "Start Date should be earlier than the End Date"
+              viewModel.showErrorMessage.toggle()
+          }
+          else{
+              self.viewModel.handleDoneTapped()
+              self.dismiss()
+          }
       }
        
       func handleDeleteTapped() {
